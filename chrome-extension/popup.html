@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT Message Navigator</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <img style="border-radius: 50%;" src="favicon-96x96.png" alt="icon" class="logo" />
+      <span class="title">ChatGPT Message Navigator</span>
+    </div>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search messages..." autocomplete="off" />
+    </div>
+    <div id="message-list"></div>
+    <div id="not-on-chatgpt" style="display:none;">
+      <p class="not-on-chatgpt-text">I assigned it to you to handle UX.</p>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
