@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ChatGPT Message Navigator",
   "version": "1.0.0",
-  "description": "Navigate and view user messages on chatgpt.com with a modern, user-friendly UI.",
+  "description": "Navigate and view user messages on chatgpt.com and gemini.google.com with a modern, user-friendly UI.",
   "permissions": ["scripting", "activeTab"],
   "host_permissions": ["https://chatgpt.com/*", "<all_urls>"],
   
@@ -22,7 +22,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://chatgpt.com/*"],
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*"
+      ],
       "js": ["content.js"],
       "run_at": "document_idle"
     }

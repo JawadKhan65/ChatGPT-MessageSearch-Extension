@@ -1,6 +1,11 @@
 // Content script: Extracts user messages and listens for popup requests
 function getUserMessages() {
-    const bubbles = Array.from(document.querySelectorAll('div.user-message-bubble-color'));
+    // For chatgpt.com
+    let bubbles = Array.from(document.querySelectorAll('div.user-message-bubble-color'));
+    // For gemini.google.com
+    if (bubbles.length === 0 && window.location.hostname.includes('gemini.google.com')) {
+        bubbles = Array.from(document.querySelectorAll('user-query'));
+    }
     return bubbles.map((el, idx) => ({
         text: el.innerText.trim(),
         index: idx
@@ -11,7 +16,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === 'GET_USER_MESSAGES') {
         sendResponse({ messages: getUserMessages() });
     } else if (request.type === 'SCROLL_TO_MESSAGE') {
-        const bubbles = Array.from(document.querySelectorAll('div.user-message-bubble-color'));
+        let bubbles = Array.from(document.querySelectorAll('div.user-message-bubble-color'));
+        if (bubbles.length === 0 && window.location.hostname.includes('gemini.google.com')) {
+            bubbles = Array.from(document.querySelectorAll('user-query'));
+        }
         const el = bubbles[request.index];
         if (el) {
             el.scrollIntoView({ behavior: 'smooth', block: 'center' });
